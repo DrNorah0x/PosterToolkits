@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Capstone Poster Toolkit · CS Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THEME — warm academic palette inspired by ScholarToolkit
+   ============================================================ */
+:root {
+  --primary: #0f766e;          /* deep teal */
+  --primary-deep: #134e4a;
+  --primary-soft: #5eead4;
+  --primary-tint: #ccfbf1;
+  --gold: #b45309;             /* warm amber for "golden tips" */
+  --gold-soft: #fef3c7;
+  --gold-deep: #78350f;
+  --bad: #b91c1c;
+  --bad-soft: #fee2e2;
+  --good: #047857;
+  --good-soft: #d1fae5;
+
+  --bg: #fdfcf9;               /* warm cream background */
+  --surface: #ffffff;
+  --surface-2: #faf8f3;
+  --text: #1c1917;
+  --text-2: #44403c;
+  --text-muted: #78716c;
+  --border: #e7e5e0;
+  --border-strong: #d6d3ce;
+
+  --shadow-sm: 0 1px 2px rgba(28,25,23,.04), 0 1px 3px rgba(28,25,23,.06);
+  --shadow-md: 0 4px 8px rgba(28,25,23,.04), 0 8px 24px rgba(28,25,23,.06);
+  --shadow-lg: 0 10px 30px rgba(15,118,110,.10), 0 20px 60px rgba(28,25,23,.08);
+
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 18px;
+
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --transition: .25s cubic-bezier(.4,0,.2,1);
+
+  --topbar-h: 60px;
+  --rubric-w: 360px;
+}
+
+[data-theme="dark"] {
+  --primary: #5eead4;
+  --primary-deep: #99f6e4;
+  --primary-soft: #134e4a;
+  --primary-tint: #042f2e;
+  --gold: #fbbf24;
+  --gold-soft: #422006;
+  --gold-deep: #fde68a;
+  --bad: #f87171;
+  --bad-soft: #450a0a;
+  --good: #34d399;
+  --good-soft: #022c22;
+
+  --bg: #0c0a09;
+  --surface: #1c1917;
+  --surface-2: #292524;
+  --text: #f5f5f4;
+  --text-2: #d6d3d1;
+  --text-muted: #a8a29e;
+  --border: #292524;
+  --border-strong: #44403c;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.4);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,.5);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+}
+button { font-family: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+a { color: var(--primary); }
+
+/* ============================================================
+   TOP TOOLBAR (slim, sticky)
+   ============================================================ */
+.toolbar {
+  height: var(--topbar-h);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+.brand-mark {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+  color: white;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 8px rgba(15,118,110,.3);
+}
+.brand-text { font-size: .95rem; letter-spacing: -0.01em; }
+.brand-text small { display: block; font-size: .72rem; color: var(--text-muted); font-weight: 400; }
+
+.controls { display: flex; gap: 6px; align-items: center; }
+.ctrl-btn {
+  background: transparent;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: .82rem;
+  font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: all var(--transition);
+}
+.ctrl-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.ctrl-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.ctrl-icon { font-size: .95rem; line-height: 1; }
+.ctrl-btn.icon-only { padding: 7px 10px; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  text-align: center;
+  padding: 56px 24px 36px;
+  max-width: 820px;
+  margin: 0 auto;
+  position: relative;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-tint);
+  color: var(--primary-deep);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 18px;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 16px 0;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.hero h1 em { font-style: italic; color: var(--primary); }
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-2);
+  max-width: 620px;
+  margin: 0 auto 24px;
+}
+.hero-cta {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-cta button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: .92rem;
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 14px rgba(15,118,110,.25);
+  transition: all var(--transition);
+}
+.hero-cta button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(15,118,110,.35); }
+.hero-cta button.secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  box-shadow: none;
+}
+.hero-cta button.secondary:hover { background: var(--primary-tint); }
+
+/* ============================================================
+   POSTER NAV PILLS (top horizontal navigation)
+   ============================================================ */
+.poster-nav {
+  max-width: 1200px;
+  margin: 0 auto 24px;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.nav-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: .88rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.nav-pill:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+.nav-pill.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(15,118,110,.3);
+}
+.nav-pill .nav-emoji { font-size: 1rem; }
+.nav-pill .nav-tag {
+  background: rgba(0,0,0,.08);
+  font-size: .68rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.nav-pill.active .nav-tag { background: rgba(255,255,255,.22); }
+
+/* ============================================================
+   STAGE — wraps poster intro + board
+   ============================================================ */
+.stage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  position: relative;
+}
+
+/* Mode pills row */
+.mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.mode-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.mode-pill {
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: .76rem;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 500;
+}
+.mode-pill.on {
+  background: var(--bad-soft);
+  border-style: solid;
+  border-color: var(--bad);
+  color: var(--bad);
+}
+.mode-pill.on.tour { background: var(--gold-soft); border-color: var(--gold); color: var(--gold-deep); }
+.tour-cta {
+  background: linear-gradient(135deg, var(--gold), #92400e);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: .88rem;
+  font-weight: 600;
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 14px rgba(180,83,9,.25);
+  transition: all var(--transition);
+}
+.tour-cta:hover { transform: translateY(-1px); }
+.tour-cta.hidden { display: none; }
+
+/* ============================================================
+   POSTER INTRO CARD (numbered category card — ScholarToolkit style)
+   ============================================================ */
+.poster-intro {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 26px 28px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+.poster-intro::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 6px; height: 100%;
+  background: linear-gradient(180deg, var(--primary), var(--primary-deep));
+}
+.intro-number {
+  width: 64px; height: 64px;
+  background: var(--primary-tint);
+  color: var(--primary-deep);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  flex-shrink: 0;
+  border: 2px solid var(--primary-soft);
+}
+.intro-text { flex-grow: 1; min-width: 0; }
+.intro-title {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.intro-desc {
+  color: var(--text-2);
+  margin: 0 0 12px 0;
+  font-size: .95rem;
+}
+.intro-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.intro-tag {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: .72rem;
+  font-weight: 500;
+}
+.intro-tag.gold { background: var(--gold-soft); color: var(--gold-deep); border-color: transparent; }
+
+/* ============================================================
+   POSTER BOARD (the actual poster)
+   ============================================================ */
+.poster-board {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "header header header"
+    "col1 col2 col3"
+    "footer footer footer";
+  gap: 20px;
+  box-shadow: var(--shadow-md);
+  transition: opacity var(--transition);
+}
+.p-header { grid-area: header; padding-bottom: 22px; border-bottom: 4px solid var(--primary); margin-bottom: 4px; }
+.p-col1 { grid-area: col1; }
+.p-col2 { grid-area: col2; }
+.p-col3 { grid-area: col3; }
+.p-footer {
+  grid-area: footer;
+  text-align: center;
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+
+.header-layout {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.header-text { flex-grow: 1; text-align: center; }
+.header-text h2 {
+  font-family: var(--font-display);
+  margin: 0 0 6px 0;
+  color: var(--primary-deep);
+  font-size: 1.7rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.authors { color: var(--text-muted); font-size: .98rem; font-style: italic; }
+.tu-logo, .project-logo { width: 78px; height: 78px; flex-shrink: 0; object-fit: contain; }
+.tu-logo { background: white; border-radius: 8px; padding: 4px; }
+
+/* ============================================================
+   POSTER SECTIONS (within the board)
+   ============================================================ */
+.section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 16px;
+  position: relative;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.section:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.section.bad-mode {
+  background: var(--bad-soft);
+  border: 2px dashed var(--bad);
+}
+.section.bad-mode::before {
+  content: "⚠ COMMON MISTAKE";
+  position: absolute;
+  top: -10px; left: 14px;
+  background: var(--bad);
+  color: white;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.section.tour-active {
+  outline: 4px solid var(--gold);
+  outline-offset: 6px;
+  z-index: 50;
+  box-shadow: 0 0 0 9999px rgba(0,0,0,.55);
+  transform: none;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.section-step {
+  background: var(--primary);
+  color: white;
+  width: 24px; height: 24px;
+  border-radius: 7px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: .8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  flex-grow: 1;
+  letter-spacing: -0.005em;
+}
+.section.bad-mode .section-title { color: var(--bad); }
+
+.info-icon {
+  background: var(--gold-soft);
+  color: var(--gold-deep);
+  border: 1px solid var(--gold);
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  font-size: .75rem;
+  font-weight: 700;
+  cursor: help;
+  position: relative;
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  transition: all var(--transition);
+}
+.info-icon:hover {
+  background: var(--gold);
+  color: white;
+  transform: scale(1.1);
+}
+.info-icon:hover .tooltip {
+  visibility: visible; opacity: 1;
+  transform: translate(-50%, -10px);
+}
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: 290px;
+  background: linear-gradient(160deg, #1c1917, #292524);
+  color: #fff;
+  text-align: left;
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  position: absolute;
+  z-index: 200;
+  bottom: 130%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: .82rem;
+  font-weight: 400;
+  line-height: 1.5;
+  box-shadow: 0 16px 40px rgba(0,0,0,.35);
+  pointer-events: none;
+  transition: all var(--transition);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.tooltip-eyebrow {
+  display: inline-block;
+  color: var(--gold-deep);
+  background: var(--gold-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: .65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+.tooltip-body { color: #f5f5f4; }
+.tooltip-rubric {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .75rem;
+  color: #d6d3d1;
+}
+.tooltip-rubric .pts {
+  background: var(--primary);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: .72rem;
+}
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%; left: 50%; margin-left: -7px;
+  border-width: 7px;
+  border-style: solid;
+  border-color: #1c1917 transparent transparent transparent;
+}
+
+.section p { margin: 0 0 10px; font-size: .9rem; line-height: 1.6; color: var(--text-2); }
+.section ul, .section ol { margin: 0 0 10px; padding-left: 18px; font-size: .9rem; color: var(--text-2); }
+.section li { margin-bottom: 5px; line-height: 1.5; }
+.section strong { color: var(--text); }
+
+/* ============================================================
+   GOLDEN TIP CALLOUT (ScholarToolkit signature element)
+   ============================================================ */
+.tip {
+  background: linear-gradient(135deg, var(--gold-soft), #fde68a);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  margin: 10px 0;
+  font-size: .85rem;
+  color: var(--gold-deep);
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+[data-theme="dark"] .tip {
+  background: var(--gold-soft);
+  color: var(--gold-deep);
+}
+.tip-label {
+  font-weight: 700;
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background: var(--gold);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  height: fit-content;
+  margin-top: 1px;
+}
+
+/* IMPACT CARD — premium gold-accented section */
+.section.impact {
+  background: linear-gradient(135deg, var(--surface) 60%, var(--gold-soft));
+  border: 1.5px solid var(--gold);
+  border-top: 4px solid var(--gold);
+}
+[data-theme="dark"] .section.impact {
+  background: linear-gradient(135deg, var(--surface) 60%, rgba(180,83,9,.15));
+}
+.section.impact .section-step { background: var(--gold); }
+.section.impact .section-title { color: var(--gold-deep); }
+.impact-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 10px 0;
+}
+.impact-stat {
+  background: var(--surface);
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: center;
+}
+.impact-stat .stat-num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--gold-deep);
+  line-height: 1;
+}
+.impact-stat .stat-label {
+  display: block;
+  font-size: .68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-top: 3px;
+  font-weight: 500;
+}
+.impact-sdg {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--gold);
+  font-size: .8rem;
+  color: var(--gold-deep);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sdg-chip {
+  background: var(--gold);
+  color: white;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: .7rem;
+  font-weight: 600;
+}
+
+/* ============================================================
+   VISUAL BOXES & CHARTS
+   ============================================================ */
+.visual {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  margin: 10px 0;
+  text-align: center;
+}
+.visual svg { width: 100%; max-height: 170px; height: auto; display: block; margin: 0 auto; }
+.visual-cap { font-size: .77rem; color: var(--text-muted); margin-top: 6px; font-style: italic; }
+
+/* ============================================================
+   TOOLS GRID
+   ============================================================ */
+.tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 12px 0;
+}
+.tool-icon {
+  width: 44px; height: 44px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  transition: all var(--transition);
+}
+.tool-icon:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.tool-icon::after {
+  content: attr(data-name);
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--surface);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: .68rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+  z-index: 10;
+}
+.tool-icon:hover::after { opacity: 1; }
+.tool-icon svg { width: 22px; height: 22px; }
+.qr-box {
+  display: inline-block;
+  padding: 8px;
+  background: white;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  margin-top: 8px;
+}
+.qr-box svg { width: 70px; height: 70px; }
+
+/* ============================================================
+   RUBRIC PANEL (slides in from right)
+   ============================================================ */
+.rubric-panel {
+  position: fixed;
+  top: var(--topbar-h);
+  right: 0;
+  width: var(--rubric-w);
+  height: calc(100vh - var(--topbar-h));
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: -10px 0 30px rgba(0,0,0,.08);
+  z-index: 90;
+  overflow-y: auto;
+  padding: 22px 22px 30px;
+  transform: translateX(100%);
+  transition: transform var(--transition);
+}
+.rubric-panel.open { transform: translateX(0); }
+.rubric-panel h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0 0 4px 0;
+  color: var(--primary-deep);
+}
+.rubric-panel .rubric-sub {
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin: 0 0 18px 0;
+}
+.score-card {
+  background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+  color: white;
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.score-num {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.score-of {
+  font-size: .8rem;
+  opacity: .85;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-top: 4px;
+}
+.score-bar {
+  height: 6px;
+  background: rgba(255,255,255,.25);
+  border-radius: 999px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+.score-fill {
+  height: 100%;
+  background: white;
+  width: 0%;
+  border-radius: 999px;
+  transition: width .4s ease;
+}
+.rubric-cat { margin-bottom: 18px; }
+.rubric-cat h4 {
+  font-family: var(--font-display);
+  font-size: .92rem;
+  color: var(--primary);
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.rubric-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.rubric-item:hover { border-color: var(--primary); background: var(--surface); }
+.rubric-item.checked {
+  background: var(--good-soft);
+  border-color: var(--good);
+}
+.rubric-item input { margin-top: 2px; accent-color: var(--good); cursor: pointer; flex-shrink: 0; }
+.rubric-item-text { flex-grow: 1; font-size: .82rem; line-height: 1.45; color: var(--text-2); }
+.rubric-pts {
+  background: var(--primary);
+  color: white;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-size: .68rem;
+  font-weight: 700;
+  margin-right: 4px;
+}
+.rubric-item.checked .rubric-pts { background: var(--good); }
+.rubric-reset {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: .82rem;
+  margin-top: 12px;
+  width: 100%;
+  transition: all var(--transition);
+}
+.rubric-reset:hover { color: var(--bad); border-color: var(--bad); }
+.rubric-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  transition: all var(--transition);
+}
+.rubric-close:hover { color: var(--bad); border-color: var(--bad); }
+
+/* ============================================================
+   GUIDED TOUR
+   ============================================================ */
+.tour-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+.tour-overlay.active { display: block; }
+.tour-card {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.3);
+  z-index: 220;
+  display: none;
+}
+.tour-card.active { display: block; }
+.tour-step-label {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--gold-deep);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.tour-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 0 0 10px 0;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.tour-card p { font-size: .92rem; color: var(--text-2); margin: 0 0 12px 0; line-height: 1.55; }
+.tour-tip-box {
+  background: var(--good-soft);
+  border-left: 3px solid var(--good);
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: .85rem;
+  color: var(--good);
+  margin-bottom: 14px;
+}
+[data-theme="dark"] .tour-tip-box { color: var(--good); }
+.tour-actions { display: flex; align-items: center; gap: 8px; }
+.tour-progress { flex-grow: 1; font-size: .8rem; color: var(--text-muted); }
+.tour-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  padding: 7px 13px;
+  border-radius: 7px;
+  font-size: .85rem;
+  font-weight: 500;
+}
+.tour-btn:hover { background: var(--border); }
+.tour-btn.primary {
+  background: var(--gold);
+  color: white;
+  border-color: var(--gold);
+}
+.tour-btn.primary:hover { background: var(--gold-deep); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  text-align: center;
+  padding: 36px 24px 28px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+.footer-tag {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--primary-deep);
+  margin-bottom: 6px;
+}
+.footer-credit {
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+.footer-credit strong { color: var(--text-2); }
+
+/* ============================================================
+   PRINT / PDF EXPORT
+   ============================================================ */
+@media print {
+  .toolbar, .hero, .poster-nav, .mode-bar, .rubric-panel, .tour-overlay, .tour-card,
+  .info-icon, .site-footer, .poster-intro { display: none !important; }
+  body { background: white; }
+  .stage { padding: 0; max-width: 100%; }
+  .poster-board { box-shadow: none; border: none; padding: 12mm; page-break-inside: avoid; }
+  .section { box-shadow: none; page-break-inside: avoid; border: 1px solid #ddd; }
+  @page { size: A3 landscape; margin: 6mm; }
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+@media (max-width: 1100px) {
+  .rubric-panel { width: min(360px, 90vw); }
+}
+@media (max-width: 900px) {
+  .poster-board {
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "col1" "col2" "col3" "footer";
+    padding: 22px;
+  }
+  .header-text h2 { font-size: 1.3rem; }
+  .impact-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .toolbar { padding: 0 14px; }
+  .ctrl-btn span:not(.ctrl-icon) { display: none; }
+  .ctrl-btn { padding: 7px 9px; }
+  .brand-text small { display: none; }
+  .hero { padding: 40px 18px 28px; }
+  .stage { padding: 0 14px 40px; }
+  .poster-intro { flex-direction: column; padding: 20px; gap: 14px; }
+  .poster-board { padding: 16px; }
+  .header-layout { flex-direction: column; }
+  .tour-card { right: 12px; left: 12px; width: auto; bottom: 12px; }
+}
+
+/* fade-in on poster swap */
+@keyframes fadeUp { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+.section { animation: fadeUp .35s ease both; }
+.section:nth-child(2) { animation-delay: .04s; }
+.section:nth-child(3) { animation-delay: .08s; }
+.section:nth-child(4) { animation-delay: .12s; }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     TOP TOOLBAR
+     ============================================ -->
+<header class="toolbar">
+  <a href="#top" class="brand">
+    <div class="brand-mark">P</div>
+    <div class="brand-text">
+      The Poster Toolkit
+      <small>CS Capstone Edition</small>
+    </div>
+  </a>
+  <div class="controls">
+    <button class="ctrl-btn" id="goodbad-btn" title="Toggle common-mistakes view">
+      <span class="ctrl-icon">⚖️</span><span>Good vs Bad</span>
+    </button>
+    <button class="ctrl-btn" id="rubric-btn" title="Open scoring rubric">
+      <span class="ctrl-icon">📋</span><span>Rubric</span>
+    </button>
+    <button class="ctrl-btn icon-only" id="theme-btn" title="Toggle dark mode">
+      <span class="ctrl-icon" id="theme-icon">🌙</span>
+    </button>
+    <button class="ctrl-btn" id="print-btn" title="Export to PDF">
+      <span class="ctrl-icon">🖨️</span><span>PDF</span>
+    </button>
+  </div>
+</header>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero" id="top">
+  <div class="hero-eyebrow">🎓 For Senior Capstone Students</div>
+  <h1>Design a poster that <em>actually gets read</em>.</h1>
+  <p class="hero-sub">
+    A walkthrough of layout, content, and grading rubrics — built specifically for
+    Computer Science capstone projects. Hover the gold (i) icons for grading tips,
+    flip on "Good vs Bad" to spot common mistakes, and use the rubric to score your draft.
+  </p>
+  <div class="hero-cta">
+    <button onclick="document.getElementById('start-tour-btn').click()">🎯 Start the Walkthrough</button>
+    <button class="secondary" onclick="document.getElementById('rubric-btn').click()">📋 Open Rubric</button>
+  </div>
+</section>
+
+<!-- ============================================
+     POSTER NAV PILLS
+     ============================================ -->
+<nav class="poster-nav" id="poster-nav"></nav>
+
+<!-- ============================================
+     STAGE
+     ============================================ -->
+<main class="stage">
+  <div class="mode-bar">
+    <div class="mode-pills">
+      <span class="mode-pill" id="pill-bad">⚠️ Mistakes view</span>
+      <span class="mode-pill tour" id="pill-tour">🎯 Guided tour</span>
+    </div>
+    <button class="tour-cta hidden" id="start-tour-btn">🎯 Start Guided Tour</button>
+  </div>
+
+  <div id="poster-intro-host"></div>
+  <div class="poster-board" id="poster-board"></div>
+</main>
+
+<!-- ============================================
+     RUBRIC PANEL
+     ============================================ -->
+<aside class="rubric-panel" id="rubric-panel">
+  <button class="rubric-close" id="rubric-close" aria-label="Close">×</button>
+  <h3>Capstone Poster Rubric</h3>
+  <p class="rubric-sub">Tick items as your poster meets each criterion. Score updates live and persists across sessions.</p>
+  <div class="score-card">
+    <div class="score-num" id="score-num">0</div>
+    <div class="score-of">of 100 points</div>
+    <div class="score-bar"><div class="score-fill" id="score-fill"></div></div>
+  </div>
+  <div id="rubric-list"></div>
+  <button class="rubric-reset" id="rubric-reset">Reset checklist</button>
+</aside>
+
+<!-- ============================================
+     TOUR
+     ============================================ -->
+<div class="tour-overlay" id="tour-overlay"></div>
+<div class="tour-card" id="tour-card">
+  <div class="tour-step-label" id="tour-label">Step 1 of 7</div>
+  <h4 id="tour-title"></h4>
+  <p id="tour-body"></p>
+  <div class="tour-tip-box" id="tour-tip"></div>
+  <div class="tour-actions">
+    <span class="tour-progress" id="tour-progress"></span>
+    <button class="tour-btn" id="tour-prev">← Back</button>
+    <button class="tour-btn" id="tour-exit">Exit</button>
+    <button class="tour-btn primary" id="tour-next">Next →</button>
+  </div>
+</div>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="site-footer">
+  <div class="footer-tag">Crafted to elevate every capstone defense.</div>
+  <div class="footer-credit">Dr. Norah Alotaibi © · College of Computer Science</div>
+</footer>
+
+<script>
+/* ====================================================================
+   ICONS — universal SVGs
+   ==================================================================== */
+const TU_LOGO = `<img src="data:image/jpeg;base64,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" class="tu-logo" alt="Taif University">`;
+
+const QR = `<svg viewBox="0 0 50 50"><rect width="50" height="50" fill="white"/><rect x="5" y="5" width="12" height="12" fill="#1e293b"/><rect x="7" y="7" width="8" height="8" fill="white"/><rect x="9" y="9" width="4" height="4" fill="#1e293b"/><rect x="33" y="5" width="12" height="12" fill="#1e293b"/><rect x="35" y="7" width="8" height="8" fill="white"/><rect x="37" y="9" width="4" height="4" fill="#1e293b"/><rect x="5" y="33" width="12" height="12" fill="#1e293b"/><rect x="7" y="35" width="8" height="8" fill="white"/><rect x="9" y="37" width="4" height="4" fill="#1e293b"/><rect x="22" y="5" width="8" height="4" fill="#1e293b"/><rect x="22" y="13" width="4" height="8" fill="#1e293b"/><rect x="33" y="22" width="12" height="4" fill="#1e293b"/><rect x="5" y="22" width="12" height="4" fill="#1e293b"/><rect x="17" y="30" width="16" height="4" fill="#1e293b"/><rect x="26" y="37" width="4" height="8" fill="#1e293b"/><rect x="35" y="35" width="10" height="10" fill="#1e293b"/></svg>`;
+
+const ICONS = {
+  python: `<svg viewBox="0 0 24 24"><path fill="#3776AB" d="M12 2c-5.5 0-5.5 2.4-5.5 2.4v2.8h5.5v1.4H6.2C3.4 8.6 3.4 12 3.4 12s0 3.4 2.8 3.4h1.4v-2.8c0-1.6 1.3-2.9 2.9-2.9h3.6c1.6 0 2.9-1.3 2.9-2.9V4.4c0 0 0-2.4-5.5-2.4z"/><path fill="#FFD43B" d="M12 22c5.5 0 5.5-2.4 5.5-2.4v-2.8h-5.5v-1.4h5.8c2.8 0 2.8-3.4 2.8-3.4s0-3.4-2.8-3.4h-1.4v2.8c0 1.6-1.3 2.9-2.9 2.9H9.8c-1.6 0-2.9 1.3-2.9 2.9v2.4c0 0 0 2.4 5.5 2.4z"/></svg>`,
+  tf: `<svg viewBox="0 0 24 24"><path fill="#FF6F00" d="M1.37 8.04l5.34-3.08v6.17l-5.34 3.08V8.04zm6.44-3.71L13.14 1.2v6.16l-5.33 3.09V4.33zm14.82 3.71v6.17l-5.34-3.08V4.96l5.34 3.08zm-6.43 3.72l5.33-3.09v6.16l-5.33 3.09v-6.16zM13.14 15.1l5.34-3.08v6.17l-5.34 3.08v-6.17zM7.81 12l5.33-3.09v6.17L7.81 18.2V12z"/></svg>`,
+  react: `<svg viewBox="-11.5 -10.23 23 20.46" fill="#61DAFB"><circle r="2.05"/><g stroke="#61DAFB" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>`,
+  pytorch: `<svg viewBox="0 0 24 24"><path fill="#EE4C2C" d="M17.15 4.39C16.89 3.1 15.68 2 12.06 2 8.45 2 7.23 3.11 6.98 4.39c-.06.29-.02.6.14.83l4.55 6.75-1.52 4.29-3.23-2.14a.97.97 0 0 0-1.11.08L2 17.1c.14.3.4.52.72.61l4.08 1.15c.67.19 1.34.46 2.05.65.73.2 1.45.31 2.15.31 2.5 0 4.14-.65 5.09-1.99.78-1.11 1.05-2.6 1.05-4.5 0-2.02-.34-3.8-.82-5.11l-3.3-4.94z"/></svg>`,
+  opencv: `<svg viewBox="0 0 24 24"><path fill="#FF0000" d="M12 2a4 4 0 0 0-4 4 4 4 0 0 0 .58 2.06A4 4 0 0 1 12 10a4 4 0 0 1 3.42-1.94A4 4 0 0 0 16 6a4 4 0 0 0-4-4z"/><path fill="#00FF00" d="M4 14a4 4 0 0 0 4 4 4 4 0 0 0 3.42-1.94A4 4 0 0 1 8 18a4 4 0 0 1-4-4 4 4 0 0 1 .58-2.06A4 4 0 0 0 4 14z"/><path fill="#0000FF" d="M20 14a4 4 0 0 0-4-4 4 4 0 0 0-3.42 1.94A4 4 0 0 1 16 18a4 4 0 0 1 4-4 4 4 0 0 0-.58-2.06A4 4 0 0 0 20 14z"/></svg>`,
+  flutter: `<svg viewBox="0 0 24 24"><path fill="#42A5F5" d="M14.3 2.1L2.1 14.3l3.6 3.6L17.9 5.7z"/><path fill="#02569B" d="M10.8 19l4.5 5 8.7-8.7-3.6-3.6z"/><path fill="#42A5F5" d="M14.3 21.9L21.5 14.7l-3.6-3.6L10.8 19z"/></svg>`,
+  node: `<svg viewBox="0 0 24 24"><path fill="#339933" d="M12 2L2 7.8v8.4l10 5.8 10-5.8V7.8L12 2zm-1.5 15.5L6 14.9v-2.3l4.5 2.6v2.3zm0-3.5L6 11.4v-2.3l4.5 2.6v2.3z"/></svg>`,
+  sumo: `<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="#FF5722"/><circle cx="12" cy="12" r="4" fill="#fff"/></svg>`,
+  mqtt: `<svg viewBox="0 0 24 24"><path fill="#660066" d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 18a8 8 0 110-16 8 8 0 010 16zm-3-9h6v2H9v-2zm0-4h6v2H9V7z"/></svg>`,
+  docker: `<svg viewBox="0 0 24 24" fill="#2496ED"><path d="M2 13h1v1H2zm2 0h1v1H4zm0-2h1v1H4zm2 2h1v1H6zm0-2h1v1H6zm0-2h1v1H6zm2 4h1v1H8zm0-2h1v1H8zm0-2h1v1H8zm2 4h1v1h-1zm0-2h1v1h-1zm0-2h1v1h-1zm2 4h1v1h-1zm0-2h1v1h-1zm4.8-2.6c-.3-.2-.7-.3-1.1-.3H18V9h-1.5v3H22v1.5c0 3-2.5 5.5-5.5 5.5H2c-.5 0-1-.5-1-1v-4h18.3c.7 0 1.3-.3 1.5-.6z"/></svg>`,
+  hf: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD21E"/><path fill="#000" d="M8 10a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm8 0a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm-4 6c-2.3 0-4.2-1.6-4.8-3.7h9.6c-.6 2.1-2.5 3.7-4.8 3.7z"/></svg>`,
+  fastapi: `<svg viewBox="0 0 24 24"><path fill="#009688" d="M12 2L2 22h10l-2-6h12L12 2z"/></svg>`,
+  figma: `<svg viewBox="0 0 24 24"><path fill="#F24E1E" d="M8 0h4v8H8a4 4 0 010-8z"/><path fill="#A259FF" d="M12 0h4a4 4 0 010 8h-4V0z"/><path fill="#0ACF83" d="M12 16h4a4 4 0 010 8 4 4 0 01-4-4v-4z"/><path fill="#FF7262" d="M8 8h4v8H8a4 4 0 010-8z"/><path fill="#1ABCFE" d="M12 8h4a4 4 0 010 8 4 4 0 01-4-4v-4z"/></svg>`,
+  voice: `<svg viewBox="0 0 24 24"><path fill="#4285F4" d="M12 14a3 3 0 003-3V5a3 3 0 00-6 0v6a3 3 0 003 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>`
+};
+
+/* ====================================================================
+   GRADING TIPS — for tooltip popovers
+   ==================================================================== */
+const TIPS = {
+  abstract:    { title: "Abstract", body: "Reviewers spend ~30 seconds here. Lead with a metric, not a backstory.", rubric: "3–4 sentences · Problem · Method · Key Metric", points: 10 },
+  overview:    { title: "System Overview", body: "Use boxes + arrows. A reviewer should grasp the pipeline in 10 seconds without reading text.", rubric: "Visual flowchart · Labeled components · Clear data flow", points: 10 },
+  dataset:     { title: "Dataset", body: "State origin, size, and how you handled class imbalance. Augmentations belong here, not the model section.", rubric: "Source cited · Size given · Augmentation listed", points: 10 },
+  model:       { title: "AI Model Pipeline", body: "Name the architecture, list 2–3 key hyperparameters (LR, epochs, batch). Justify any modifications.", rubric: "Architecture named · Hyperparameters · Justified mods", points: 15 },
+  components:  { title: "System Components", body: "Use real screenshots or clean mockups — not lorem-ipsum boxes. Show the user benefit.", rubric: "Real screenshots · UX clear · End-user value shown", points: 10 },
+  results:     { title: "Results", body: "Quantitative comparison is mandatory. Always include a baseline. Use color coding (gray = baseline, accent = yours).", rubric: "Quantitative · Baseline included · Color-coded chart", points: 20 },
+  impact:      { title: "Impact", body: "Translate metrics into people: who benefits, by how much, and why it matters. Tie to Vision 2030 / SDGs where possible.", rubric: "Beneficiaries named · Quantified value · Vision/SDG aligned", points: 10 },
+  conclusion:  { title: "Conclusion & Future Work", body: "State limitations honestly. List 2 concrete future-work items, not vague aspirations.", rubric: "Honest limits · 2+ future items · No hyperbole", points: 10 },
+  tools:       { title: "Tools & QR", body: "Use recognized icons (Python, PyTorch, etc.) instead of text labels. QR code links to repo or demo.", rubric: "Icons (not text) · Working QR · Linked repo", points: 5 },
+  header:      { title: "Header", body: "Title in <12 words. Make the impact visible at 2-meter reading distance. Logos balance left/right.", rubric: "Title <12 words · Authors · Affiliation · Logos", points: 5 }
+};
+
+/* ====================================================================
+   RUBRIC CHECKLIST — 100 points
+   ==================================================================== */
+const RUBRIC = [
+  { cat: "Content (40)", items: [
+    { id: "abstract",     pts: 10, text: "Abstract states problem, method, and one key metric in ≤4 sentences" },
+    { id: "method",       pts: 10, text: "Methodology has a labeled pipeline diagram" },
+    { id: "dataset",      pts: 10, text: "Dataset source, size, and class balance are stated" },
+    { id: "results-q",    pts: 10, text: "Results include quantitative numbers vs a baseline" }
+  ]},
+  { cat: "Visual Design (30)", items: [
+    { id: "layout-3col",  pts: 5,  text: "Clear 3-column layout that reads top-down, left-right" },
+    { id: "title-read",   pts: 5,  text: "Title is readable from 2 meters distance" },
+    { id: "color",        pts: 5,  text: "Consistent palette (≤3 main colors)" },
+    { id: "no-walls",     pts: 5,  text: "No paragraph longer than 4 lines" },
+    { id: "whitespace",   pts: 5,  text: "Adequate white space — not cluttered" },
+    { id: "icons",        pts: 5,  text: "Tool stack shown as icons, not text" }
+  ]},
+  { cat: "Evidence & Impact (20)", items: [
+    { id: "baseline",     pts: 5,  text: "Charts include a baseline comparison" },
+    { id: "axes",         pts: 5,  text: "All chart axes are labeled with units" },
+    { id: "metric-name",  pts: 5,  text: "Headline metric is named (e.g., mAP@50, F1)" },
+    { id: "impact-quant", pts: 5,  text: "Impact section quantifies real-world value" }
+  ]},
+  { cat: "Polish (10)", items: [
+    { id: "qr",           pts: 3,  text: "QR code present and tested" },
+    { id: "typos",        pts: 3,  text: "No spelling or grammar errors" },
+    { id: "logos",        pts: 4,  text: "University and project logos balanced in header" }
+  ]}
+];
+
+/* ====================================================================
+   HELPERS
+   ==================================================================== */
+function section({ tipKey, step, title, html, badHtml, kind }) {
+  const isImpact = kind === 'impact';
+  return `
+    <div class="section ${isImpact ? 'impact' : ''}" data-tip="${tipKey || ''}" data-bad-html="${(badHtml || '').replace(/"/g, '&quot;')}">
+      <div class="section-head">
+        ${step ? `<span class="section-step">${step}</span>` : ''}
+        <span class="section-title">${title}</span>
+        ${tipKey ? `<span class="info-icon" data-tipkey="${tipKey}">i</span>` : ''}
+      </div>
+      <div class="section-content">${html}</div>
+    </div>`;
+}
+function tools(keys, names) {
+  return `<div class="tools-grid">${keys.map((k,i)=>`<div class="tool-icon" data-name="${names[i]}">${ICONS[k]||''}</div>`).join('')}</div>`;
+}
+function impactStats(stats) {
+  return `<div class="impact-stats">${stats.map(s=>`<div class="impact-stat"><span class="stat-num">${s.num}</span><span class="stat-label">${s.label}</span></div>`).join('')}</div>`;
+}
+
+/* ====================================================================
+   POSTERS — all 6 examples (English)
+   ==================================================================== */
+const POSTERS = [
+  /* ============ 0. STEP-BY-STEP GUIDE ============ */
+  {
+    isGuide: true,
+    emoji: "🎓",
+    name: "Step-by-Step Guide",
+    badge: "Guide",
+    introTitle: "How to Design a Scientific Poster",
+    introDesc: "Walk through every section of a winning capstone poster. Each card explains what to write, what to draw, and what reviewers will look for. Click the gold ⓘ icons for the rubric behind each section.",
+    introTags: ["Foundational", "Recommended start", "8 sections"],
+    title: "How to Design a Scientific Poster — Layout Walkthrough",
+    authors: "Author Names · Supervised by Dr. Name",
+    themePrimary: "#0f766e",
+    projectLogo: `<svg viewBox="0 0 100 100" class="project-logo"><circle cx="50" cy="50" r="45" fill="#ccfbf1" stroke="#0f766e" stroke-width="4"/><text x="50" y="56" fill="#134e4a" font-size="26" text-anchor="middle" font-weight="800" font-family="serif">AI</text><text x="50" y="78" fill="#0f766e" font-size="10" text-anchor="middle">Project Logo</text></svg>`,
+    col1: section({ tipKey:"abstract", step:1, title:"Abstract",
+      html:`<p><strong>Limit to 3–4 sentences.</strong> State the problem, the AI/Systems approach, and your headline metric. Include a number (e.g., "+4.2% over baseline"). Reviewers scan abstracts to decide whether to keep reading.</p>
+      <div class="tip"><span class="tip-label">Golden Tip</span><div>Template: "<em>X causes Y problem. We propose Z. Result: N% improvement over baseline.</em>"</div></div>`,
+      badHtml:`<p>In recent years, with the advancement of computing technology and the increasing relevance of artificial intelligence in modern society, our project explores a novel approach using machine learning techniques applied to a real-world problem. We hope this work will be useful for many applications and that future researchers will find inspiration here. We are very excited to present our work and gratefully acknowledge our supervisor for guidance throughout this academic year. The dataset we used was carefully chosen…</p><p style="color:#b91c1c;font-size:.82rem;margin-top:8px;"><strong>Why this fails:</strong> No problem stated. No method named. No metric. Reviewer is gone after sentence two.</p>`
+    }) +
+    section({ tipKey:"overview", step:2, title:"Methodology — System Overview",
+      html:`<p>A reviewer should grasp your entire system in 10 seconds. Use logical left-to-right or top-to-bottom flow. Avoid paragraphs here.</p>
+      <div class="visual">
+        <svg viewBox="0 0 200 80"><defs><marker id="ar1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#78716c"/></marker></defs>
+        <rect x="10" y="20" width="40" height="40" fill="#0f766e" rx="6"/><text x="30" y="45" fill="white" font-size="11" text-anchor="middle">User</text>
+        <path d="M 50 40 L 90 40" stroke="#78716c" stroke-width="2" marker-end="url(#ar1)"/>
+        <rect x="90" y="20" width="50" height="40" fill="#5eead4" rx="6"/><text x="115" y="45" fill="#134e4a" font-size="11" text-anchor="middle">System</text>
+        <path d="M 140 40 L 170 40" stroke="#78716c" stroke-width="2" marker-end="url(#ar1)"/>
+        <circle cx="180" cy="40" r="14" fill="#b45309"/></svg>
+        <div class="visual-cap">A high-level flowchart anchors the entire poster.</div>
+      </div>`,
+      badHtml:`<p>The user inputs data into the system which then processes it through several layers including a preprocessing layer, then a feature extraction layer, then a classification layer, then an output formatting layer, and finally returns a result back to the user via a REST API endpoint that uses HTTPS for secure transport over the internet.</p><p style="color:#b91c1c;font-size:.82rem;"><strong>Why this fails:</strong> Wall of text. No diagram. Reviewer cannot picture the system.</p>`
+    }) +
+    section({ tipKey:"dataset", step:3, title:"Methodology — Dataset",
+      html:`<p>State your dataset's <strong>origin</strong>, <strong>size</strong>, and <strong>splits</strong>. Briefly list augmentations (rotation, CLAHE, synthetic) used to combat class imbalance.</p>`,
+      badHtml:`<p>We used a publicly available dataset for our experiments and split it into training and testing portions.</p><p style="color:#b91c1c;font-size:.82rem;"><strong>Why this fails:</strong> Which dataset? How many samples? What split ratio? Zero specifics.</p>`
+    }),
+
+    col2: section({ tipKey:"model", step:4, title:"Methodology — AI Model Pipeline",
+      html:`<p>Show how data flows through the algorithm. Specify the architecture (CNN, Transformer, etc.) and key hyperparameters (LR, epochs, batch size).</p>
+      <div class="visual">
+        <svg viewBox="0 0 200 120"><rect x="50" y="10" width="100" height="20" fill="#e7e5e0" rx="4"/><text x="100" y="25" font-size="10" text-anchor="middle" fill="#44403c">Preprocessing</text>
+        <path d="M 100 30 L 100 50" stroke="#78716c" stroke-width="2"/>
+        <rect x="40" y="50" width="120" height="30" fill="#0f766e" rx="6"/><text x="100" y="69" fill="white" font-size="12" text-anchor="middle">AI Core (e.g. YOLOv8)</text>
+        <path d="M 100 80 L 100 100" stroke="#78716c" stroke-width="2"/>
+        <rect x="60" y="100" width="80" height="20" fill="#b45309" rx="4"/><text x="100" y="114" fill="white" font-size="10" text-anchor="middle">Classification</text></svg>
+      </div>`,
+      badHtml:`<p>We used machine learning to build our model. The model performed well on our data.</p><p style="color:#b91c1c;font-size:.82rem;"><strong>Why this fails:</strong> Which model? Which framework? "Performed well" is meaningless.</p>`
+    }) +
+    section({ tipKey:"components", step:5, title:"System Components & Dashboards",
+      html:`<p>Show actual screenshots or mockups. Emphasize how the AI output becomes <em>actionable</em> for the end-user.</p>
+      <div class="visual">
+        <svg viewBox="0 0 200 100"><rect x="10" y="10" width="80" height="80" fill="#faf8f3" stroke="#d6d3ce" rx="6"/><rect x="10" y="10" width="80" height="14" fill="#0f766e" rx="6"/><circle cx="50" cy="50" r="14" fill="#5eead4"/>
+        <rect x="100" y="10" width="90" height="80" fill="#faf8f3" stroke="#d6d3ce" rx="4"/><rect x="100" y="10" width="90" height="14" fill="#134e4a" rx="2"/><rect x="110" y="35" width="20" height="40" fill="#a8a29e"/><rect x="135" y="55" width="20" height="20" fill="#78716c"/><rect x="160" y="25" width="20" height="50" fill="#44403c"/></svg>
+        <div class="visual-cap">Mobile app (left) + Web dashboard (right)</div>
+      </div>`,
+      badHtml:`<p>The system is implemented as a web application. Users can log in and see their results.</p><p style="color:#b91c1c;font-size:.82rem;"><strong>Why this fails:</strong> No screenshot. Reviewer cannot judge UX.</p>`
+    }) +
+    section({ tipKey:"results", step:6, title:"Results",
+      html:`<p>Quantitative proof is mandatory. Use confusion matrices for classification, line/bar graphs for latency. Color code: <span style="color:#a8a29e;font-weight:600;">gray = baseline</span>, <span style="color:#0f766e;font-weight:600;">teal = your system</span>.</p>
+      <div class="visual"><svg viewBox="0 0 200 80"><line x1="20" y1="10" x2="20" y2="70" stroke="#44403c"/><line x1="20" y1="70" x2="180" y2="70" stroke="#44403c"/>
+      <rect x="40" y="30" width="30" height="40" fill="#a8a29e"/><text x="55" y="25" font-size="10" text-anchor="middle" fill="#44403c">82%</text>
+      <rect x="100" y="10" width="30" height="60" fill="#0f766e"/><text x="115" y="8" font-size="11" text-anchor="middle" font-weight="bold" fill="#134e4a">98%</text></svg></div>`,
+      badHtml:`<p>Our system achieved good results and outperformed the baseline approach in most cases.</p><p style="color:#b91c1c;font-size:.82rem;"><strong>Why this fails:</strong> No numbers. No chart. "Most cases" hides the failures.</p>`
+    }),
+
+    col3: section({ tipKey:"impact", step:7, title:"Impact", kind:"impact",
+      html:`<p>Translate metrics into <strong>real people and value</strong>. Examiners reward students who connect technical work to societal benefit.</p>
+      ${impactStats([{num:"12K+",label:"Beneficiaries"},{num:"$0.4M",label:"Annual savings"},{num:"3 cities",label:"Pilot scope"},{num:"−40%",label:"Manual effort"}])}
+      <div class="impact-sdg"><span class="sdg-chip">Vision 2030</span><span>Aligned with Digital Transformation pillar</span></div>`,
+      badHtml:`<p>This project could be useful for many people in society and may have a positive impact on the future.</p><p style="color:#b91c1c;font-size:.82rem;"><strong>Why this fails:</strong> No numbers. No specific stakeholder. Vague aspirations.</p>`
+    }) +
+    section({ tipKey:"conclusion", step:8, title:"Conclusion & Future Work",
+      html:`<ul><li><strong>Conclusion:</strong> Restate the headline finding without hyperbole. Disclose specific limitations.</li><li><strong>Future Work:</strong> List 2 concrete next steps tied to those limitations.</li></ul>`,
+      badHtml:`<p>This project was a great learning experience and our system works very well. We hope to continue improving it in the future.</p><p style="color:#b91c1c;font-size:.82rem;"><strong>Why this fails:</strong> Hyperbole. No limits. Vague future work.</p>`
+    }) +
+    section({ tipKey:"tools", title:"Tools & Technologies",
+      html:`<p style="text-align:center;font-size:.82rem;">Universally recognized icons beat text labels — they save space and look professional.</p>${tools(['python','tf','react'],['Python','TensorFlow','React'])}<div style="text-align:center;margin-top:14px;"><strong style="font-size:.85rem;">Scan for Project URL</strong><div class="qr-box">${QR}</div></div>`,
+      badHtml:`<p style="text-align:center;font-size:.85rem;">Tools used: Python 3.9, TensorFlow 2.10, Keras, NumPy 1.21, Pandas 1.4, Matplotlib 3.5, Seaborn 0.11, scikit-learn 1.0, OpenCV 4.5, Pillow, requests, Flask, React 18.2, Redux, axios, Material-UI, Webpack, Babel, ESLint, Prettier, Docker, nginx, PostgreSQL, Redis…</p><p style="color:#b91c1c;font-size:.82rem;"><strong>Why this fails:</strong> List every dependency in your repo, not on the poster. Use icons.</p>`
+    })
+  },
+
+  /* ============ 1. AGRISENSE ============ */
+  {
+    emoji: "🌾",
+    name: "AgriSense",
+    badge: "CV / Drones",
+    introTitle: "Drone-Based Wheat Rust Detection",
+    introDesc: "A computer-vision capstone that puts YOLOv8 on the edge — onboard a Raspberry Pi flying over Saudi wheat fields. Detects early-stage rust and pings farmers before infection spreads.",
+    introTags: ["Computer Vision", "Edge AI", "AgriTech", "Vision 2030"],
+    title: "AgriSense: Drone-Based Wheat Rust Detection",
+    authors: "A. Alotaibi, M. Alqurashi · Supervised by Dr. N. Alotaibi",
+    themePrimary: "#047857",
+    projectLogo: `<svg viewBox="0 0 100 100" class="project-logo"><circle cx="50" cy="50" r="45" fill="#d1fae5" stroke="#047857" stroke-width="4"/><path d="M 30 50 L 50 30 L 70 50 M 50 30 L 50 80" stroke="#047857" stroke-width="8" stroke-linecap="round" fill="none"/><text x="50" y="92" fill="#064e3b" font-size="10" text-anchor="middle" font-weight="bold">AgriSense</text></svg>`,
+    col1: section({ tipKey:"abstract", title:"Abstract",
+      html:`<p>Crop diseases cause up to 20% annual yield loss globally. AgriSense introduces an autonomous UAV pipeline for early disease detection. By equipping drones with an edge-optimized YOLOv8 model, the system detects early-stage wheat rust on leaves with <strong>96.4% mAP@50</strong>, alerting farmers via a mobile app before infection spreads.</p>`
+    }) +
+    section({ tipKey:"overview", title:"Methodology — System Overview",
+      html:`<p>Drones execute pre-programmed grid flights. Footage is processed locally on a Raspberry Pi 4 payload, transmitting only GPS coordinates of detected infections to save bandwidth.</p>
+      <div class="visual"><svg viewBox="0 0 200 80"><rect x="5" y="25" width="40" height="30" fill="#a7f3d0" stroke="#047857" rx="6"/><text x="25" y="44" font-size="9" text-anchor="middle" fill="#064e3b">Drone</text>
+      <path d="M 45 40 L 70 40" stroke="#047857" stroke-width="2" stroke-dasharray="3"/>
+      <rect x="75" y="15" width="50" height="50" fill="#047857" rx="6"/><text x="100" y="44" fill="white" font-size="11" text-anchor="middle" font-weight="bold">Edge AI</text>
+      <path d="M 125 40 L 150 40" stroke="#047857" stroke-width="2" stroke-dasharray="3"/>
+      <rect x="155" y="20" width="40" height="40" fill="#5eead4" rx="6"/><text x="175" y="44" fill="#134e4a" font-size="9" text-anchor="middle">Cloud</text></svg>
+      <div class="visual-cap">End-to-End Edge Inference</div></div>`
+    }) +
+    section({ tipKey:"dataset", title:"Methodology — Dataset",
+      html:`<p>CGIAR Wheat Rust Dataset (8,400 images). To combat class imbalance and varied outdoor lighting, we applied random rotation (±15°), color jitter, and CLAHE contrast normalization. Train/val/test split 70/15/15.</p>`
+    }) +
+    section({ tipKey:"model", title:"AI Model Pipeline",
+      html:`<p>Standard YOLOv8 was too heavy for drone batteries. We replaced standard convolutions with <strong>Depthwise Separable Convolutions</strong>, reducing parameters by 30% for edge deployment. LR=1e-3, 80 epochs, batch=16.</p>
+      <div class="visual"><svg viewBox="0 0 200 110"><rect x="20" y="10" width="160" height="22" fill="#e7e5e0" rx="6"/><text x="100" y="26" font-size="10" text-anchor="middle" fill="#44403c">Resize + CLAHE Contrast</text>
+      <path d="M 100 32 L 100 48" stroke="#047857" stroke-width="2"/>
+      <rect x="40" y="48" width="120" height="38" fill="#047857" rx="8"/><text x="100" y="66" fill="white" font-size="12" text-anchor="middle" font-weight="bold">YOLOv8-Nano (Pruned)</text><text x="100" y="80" fill="#a7f3d0" font-size="8" text-anchor="middle">Backbone + FPN</text>
+      <rect x="60" y="92" width="80" height="14" fill="#b45309" rx="3"/><text x="100" y="103" fill="white" font-size="9" text-anchor="middle">Bounding Boxes</text></svg></div>`
+    }),
+
+    col2: section({ tipKey:"components", title:"System Components & Dashboards",
+      html:`<p>Mobile app pushes instant alerts to farmers. Web Dashboard renders a heat-map GIS overlay for agronomists to assess field-wide health.</p>
+      <div class="visual"><svg viewBox="0 0 220 120"><rect x="10" y="10" width="60" height="100" fill="#faf8f3" stroke="#a8a29e" rx="8"/><rect x="10" y="10" width="60" height="14" fill="#047857" rx="6"/><rect x="15" y="30" width="50" height="42" fill="#d1fae5" rx="3"/><rect x="25" y="40" width="15" height="15" fill="none" stroke="#dc2626" stroke-width="2"/><rect x="15" y="80" width="50" height="10" fill="#dc2626" rx="3"/>
+      <rect x="80" y="10" width="130" height="100" fill="#faf8f3" stroke="#a8a29e" rx="6"/><rect x="80" y="10" width="130" height="14" fill="#064e3b" rx="3"/><rect x="90" y="35" width="60" height="60" fill="#d1fae5"/><circle cx="120" cy="65" r="5" fill="#dc2626"/><circle cx="100" cy="50" r="5" fill="#dc2626"/><rect x="160" y="55" width="10" height="40" fill="#5eead4"/><rect x="175" y="75" width="10" height="20" fill="#fbbf24"/><rect x="190" y="45" width="10" height="50" fill="#dc2626"/></svg>
+      <div class="visual-cap">Farmer App + Agronomist GIS Dashboard</div></div>`
+    }) +
+    section({ tipKey:"results", title:"Results",
+      html:`<p>Depthwise convolutions minimized battery drain — drone maintained <strong>62 FPS</strong> at <strong>3.4W</strong> edge power, vs Faster R-CNN baseline.</p>
+      <div class="visual"><svg viewBox="0 0 200 100"><line x1="20" y1="10" x2="20" y2="80" stroke="#44403c"/><line x1="20" y1="80" x2="180" y2="80" stroke="#44403c"/>
+      <text x="10" y="45" font-size="8" transform="rotate(-90 10,45)" text-anchor="middle" fill="#44403c">mAP@50</text>
+      <rect x="40" y="40" width="30" height="40" fill="#a8a29e"/><text x="55" y="35" font-size="10" text-anchor="middle" fill="#44403c">82%</text><text x="55" y="95" font-size="8" text-anchor="middle" fill="#78716c">Faster R-CNN</text>
+      <rect x="110" y="15" width="30" height="65" fill="#047857"/><text x="125" y="10" font-size="11" text-anchor="middle" font-weight="bold" fill="#064e3b">96.4%</text><text x="125" y="95" font-size="8" text-anchor="middle" font-weight="bold" fill="#064e3b">YOLOv8-N</text></svg>
+      <div class="visual-cap">Performance vs Baseline</div></div>`
+    }) +
+    section({ tipKey:"conclusion", title:"Conclusion & Future Work",
+      html:`<p>AgriSense brings high-speed AI to low-connectivity rural farms. <strong>Limitation:</strong> performance drops 8% in low-light dawn/dusk.</p>
+      <ul><li>Expand training to corn blight & leaf spot.</li><li>Integrate automated pesticide spraying logic.</li></ul>`
+    }),
+
+    col3: section({ tipKey:"impact", title:"Impact", kind:"impact",
+      html:`<p>Saudi Arabia imports ~80% of its wheat. Cutting losses at the source has both food-security and water-conservation value in arid regions.</p>
+      ${impactStats([{num:"8.4K",label:"Hectares scannable / day"},{num:"−80%",label:"Inspection time"},{num:"−35%",label:"Pesticide overuse"},{num:"5×",label:"Earlier detection"}])}
+      <div class="impact-sdg"><span class="sdg-chip">SDG 2</span><span>Zero Hunger · Sustainable Agriculture</span></div>`
+    }) +
+    section({ tipKey:"tools", title:"Tools & QR",
+      html:`${tools(['pytorch','opencv','flutter','node'],['PyTorch','OpenCV','Flutter','Node.js'])}<div style="text-align:center;"><div class="qr-box">${QR}</div></div>`
+    })
+  },
+
+  /* ============ 2. EDGE-IOT TRAFFIC ============ */
+  {
+    emoji: "🚦",
+    name: "SmartSignal",
+    badge: "IoT / RL",
+    introTitle: "Federated Edge Traffic Light Optimization",
+    introDesc: "Reinforcement-learning agents run directly on intersection cameras, learning faster cycles without ever streaming video to the cloud. A privacy-preserving smart-city case study.",
+    introTags: ["IoT", "Reinforcement Learning", "Smart Cities", "Privacy-Preserving"],
+    title: "Federated Edge Computing for Traffic Light Optimization",
+    authors: "S. Alharbi, R. Alshehri · Supervised by Dr. N. Alotaibi",
+    themePrimary: "#b45309",
+    projectLogo: `<svg viewBox="0 0 100 100" class="project-logo"><circle cx="50" cy="50" r="45" fill="#fef3c7" stroke="#b45309" stroke-width="4"/><circle cx="50" cy="30" r="9" fill="#dc2626"/><circle cx="50" cy="50" r="9" fill="#fbbf24"/><circle cx="50" cy="70" r="9" fill="#10b981"/></svg>`,
+    col1: section({ tipKey:"abstract", title:"Abstract",
+      html:`<p>Centralized smart-city traffic management incurs 500ms+ round-trip latency. We introduce a Federated Edge framework where AI runs directly on IoT cameras to optimize light cycles via Reinforcement Learning, transmitting only gradient updates. Result: <strong>42ms latency</strong> and <strong>+21% throughput</strong>.</p>`
+    }) +
+    section({ tipKey:"overview", title:"Methodology — System Overview",
+      html:`<p>Intersection nodes independently calculate optimal phases. Nodes share DQN gradients periodically with a cloud aggregator — no raw video (preserves PII).</p>
+      <div class="visual"><svg viewBox="0 0 200 100"><ellipse cx="100" cy="20" rx="55" ry="14" fill="#fef3c7" stroke="#b45309"/><text x="100" y="24" font-size="10" text-anchor="middle" fill="#78350f" font-weight="600">Cloud Aggregator</text>
+      <path d="M 100 35 L 50 65" stroke="#a8a29e" stroke-dasharray="3"/><path d="M 100 35 L 150 65" stroke="#a8a29e" stroke-dasharray="3"/>
+      <rect x="20" y="65" width="60" height="25" fill="#fef3c7" stroke="#b45309" rx="4"/><text x="50" y="80" font-size="9" text-anchor="middle" fill="#78350f">Edge Node N</text>
+      <rect x="120" y="65" width="60" height="25" fill="#fef3c7" stroke="#b45309" rx="4"/><text x="150" y="80" font-size="9" text-anchor="middle" fill="#78350f">Edge Node E</text></svg></div>`
+    }) +
+    section({ tipKey:"dataset", title:"Methodology — Dataset",
+      html:`<p>SUMO (Simulation of Urban MObility) generated 100,000 synthetic rush-hour permutations across a 4-intersection grid for pre-training. Validated against 30-day camera data from a Riyadh pilot intersection.</p>`
+    }) +
+    section({ tipKey:"model", title:"AI Model Pipeline",
+      html:`<p>RL environment: State = queue length per lane. Action = phase change. Reward = inverse waiting time. Replay buffer 50k, ε-greedy decay 1.0→0.05.</p>
+      <div class="visual"><svg viewBox="0 0 200 110"><rect x="20" y="10" width="60" height="36" fill="#e7e5e0" rx="4"/><text x="50" y="32" font-size="9" text-anchor="middle" fill="#44403c">Camera</text>
+      <path d="M 80 28 L 110 28" stroke="#b45309" stroke-width="2"/>
+      <rect x="110" y="10" width="70" height="36" fill="#b45309" rx="4"/><text x="145" y="24" fill="white" font-size="10" text-anchor="middle" font-weight="bold">DQN Agent</text><text x="145" y="38" fill="#fef3c7" font-size="8" text-anchor="middle">State: Queue Len</text>
+      <path d="M 145 46 L 145 64" stroke="#b45309" stroke-width="2"/>
+      <rect x="95" y="64" width="100" height="32" fill="#1c1917" rx="4"/><text x="145" y="78" fill="white" font-size="9" text-anchor="middle">Action: Phase Change</text><text x="145" y="91" fill="#5eead4" font-size="8" text-anchor="middle">Reward: Wait Time ↓</text></svg></div>`
+    }),
+
+    col2: section({ tipKey:"components", title:"System Components & Dashboards",
+      html:`<p>Live Command Center — municipal staff override AI, monitor latency, view federated weight-sync status across all city nodes.</p>
+      <div class="visual"><svg viewBox="0 0 200 100"><rect x="10" y="10" width="180" height="80" fill="#faf8f3" stroke="#d6d3ce" rx="4"/><rect x="10" y="10" width="180" height="14" fill="#b45309" rx="2"/><text x="20" y="20" fill="white" font-size="8">City Traffic Command Center</text>
+      <rect x="20" y="32" width="60" height="50" fill="#e7e5e0"/><rect x="25" y="38" width="10" height="10" fill="none" stroke="#dc2626"/><rect x="50" y="60" width="10" height="10" fill="none" stroke="#dc2626"/>
+      <rect x="90" y="32" width="90" height="14" fill="#d1fae5"/><text x="95" y="42" fill="#166534" font-size="8">Node A Latency: 12ms</text>
+      <path d="M 90 80 L 120 65 L 150 75 L 180 55" fill="none" stroke="#0f766e" stroke-width="2"/></svg></div>`
+    }) +
+    section({ tipKey:"results", title:"Results",
+      html:`<p>Edge processing maintained <strong>42ms latency</strong> vs 850ms cloud. Intersection throughput rose from 1,200 to 1,450 vehicles/hour.</p>
+      <div class="visual"><svg viewBox="0 0 200 90"><line x1="20" y1="10" x2="20" y2="70" stroke="#44403c"/><line x1="20" y1="70" x2="180" y2="70" stroke="#44403c"/>
+      <text x="10" y="40" font-size="8" transform="rotate(-90 10,40)" text-anchor="middle" fill="#44403c">Latency</text>
+      <rect x="40" y="15" width="40" height="55" fill="#dc2626"/><text x="60" y="10" font-size="11" text-anchor="middle" font-weight="bold" fill="#7f1d1d">850ms</text><text x="60" y="85" font-size="9" text-anchor="middle" fill="#78716c">Cloud</text>
+      <rect x="120" y="60" width="40" height="10" fill="#0f766e"/><text x="140" y="55" font-size="11" text-anchor="middle" font-weight="bold" fill="#134e4a">42ms</text><text x="140" y="85" font-size="9" text-anchor="middle" font-weight="bold" fill="#134e4a">Edge</text></svg></div>`
+    }) +
+    section({ tipKey:"conclusion", title:"Conclusion & Future Work",
+      html:`<p>Metadata-only transmission cut bandwidth 94% while reducing wait times. <strong>Limitation:</strong> tested only in simulation + one pilot intersection.</p>
+      <ul><li>Implement V2X (Vehicle-to-Everything) protocols.</li><li>Add EMS priority routing for ambulances.</li></ul>`
+    }),
+
+    col3: section({ tipKey:"impact", title:"Impact", kind:"impact",
+      html:`<p>Riyadh commuters lose ~74 hours/year to congestion. Faster signal cycles compound across millions of trips into measurable economic and environmental gains.</p>
+      ${impactStats([{num:"−21min",label:"Daily commute saved"},{num:"−18%",label:"CO₂ at intersection"},{num:"94%",label:"Bandwidth saved"},{num:"0",label:"Faces transmitted"}])}
+      <div class="impact-sdg"><span class="sdg-chip">SDG 11</span><span>Sustainable Cities · Smart Mobility · Vision 2030</span></div>`
+    }) +
+    section({ tipKey:"tools", title:"Tools & QR",
+      html:`${tools(['sumo','tf','mqtt','docker'],['SUMO','TensorFlow','MQTT','Docker'])}<div style="text-align:center;"><div class="qr-box">${QR}</div></div>`
+    })
+  },
+
+  /* ============ 3. ARADIALECT ============ */
+  {
+    emoji: "🗣️",
+    name: "AraDialect",
+    badge: "NLP",
+    introTitle: "Transformer NLP for Saudi Dialects",
+    introDesc: "Standard Arabic NLP fails on the way Saudis actually speak online. AraDialect fine-tunes MARBERT to classify Najdi, Hejazi, Eastern, and Southern dialects — for chatbots that answer in your accent.",
+    introTags: ["NLP", "Transformers", "Arabic", "Cultural Tech"],
+    title: "AraDialect: Transformer NLP for Saudi Dialects",
+    authors: "K. Alzahrani, N. Alotaibi · Supervised by Dr. N. Alotaibi",
+    themePrimary: "#4338ca",
+    projectLogo: `<svg viewBox="0 0 100 100" class="project-logo"><circle cx="50" cy="50" r="45" fill="#e0e7ff" stroke="#4338ca" stroke-width="4"/><path d="M 30 50 Q 50 20 70 50 T 30 50" fill="none" stroke="#4338ca" stroke-width="4"/><text x="50" y="78" fill="#312e81" font-size="16" text-anchor="middle" font-weight="bold">ع</text></svg>`,
+    col1: section({ tipKey:"abstract", title:"Abstract",
+      html:`<p>Dialectal Arabic breaks NLP parsers trained on standard news corpora. AraDialect fine-tunes MARBERT achieving <strong>88.4% accuracy</strong> on 4 Saudi macro-dialects (Najdi, Hejazi, Eastern, Southern), enabling regional sentiment analysis and chatbot routing.</p>`
+    }) +
+    section({ tipKey:"overview", title:"Methodology — System Overview",
+      html:`<p>Automated Twitter scraping via snscrape → regex sanitization (URLs, English chars, bot spam) → balanced corpus → fine-tuning → API.</p>
+      <div class="visual"><svg viewBox="0 0 200 80"><rect x="10" y="25" width="40" height="30" fill="#e7e5e0" rx="6"/><text x="30" y="44" font-size="9" text-anchor="middle" fill="#44403c">Twitter</text>
+      <path d="M 50 40 L 75 40" stroke="#4338ca" stroke-width="2"/>
+      <rect x="80" y="20" width="40" height="40" fill="#4338ca" rx="6"/><text x="100" y="44" fill="white" font-size="11" text-anchor="middle" font-weight="bold">NLP</text>
+      <path d="M 120 40 L 145 40" stroke="#4338ca" stroke-width="2"/>
+      <rect x="150" y="25" width="40" height="30" fill="#a5b4fc" rx="6"/><text x="170" y="44" fill="#312e81" font-size="9" text-anchor="middle">API</text></svg></div>`
+    }) +
+    section({ tipKey:"dataset", title:"Methodology — Dataset",
+      html:`<p>250,000 geo-tagged tweets, balanced across 4 regions. Manual verification of 5,000 random samples gave Cohen's κ = 0.82 inter-annotator agreement among 3 native speakers.</p>`
+    }) +
+    section({ tipKey:"model", title:"AI Model Pipeline",
+      html:`<p>WordPiece tokenization → MARBERT encoder (12 layers) → linear classification head → Cross-Entropy loss, 5 epochs, LR=2e-5, batch=32.</p>
+      <div class="visual"><svg viewBox="0 0 200 110"><rect x="40" y="8" width="120" height="22" fill="#f5f5f4" stroke="#a8a29e" rx="4"/><text x="100" y="22" font-size="11" text-anchor="middle" font-family="monospace" fill="#1c1917">"وش اخباركم؟"</text>
+      <rect x="60" y="40" width="80" height="18" fill="#e7e5e0" rx="3"/><text x="100" y="52" font-size="9" text-anchor="middle" fill="#44403c">WordPiece</text>
+      <rect x="40" y="68" width="120" height="36" fill="#4338ca" rx="6"/><text x="100" y="86" fill="white" font-size="13" text-anchor="middle" font-weight="bold">MARBERT</text><text x="100" y="100" fill="#c7d2fe" font-size="9" text-anchor="middle">+ Softmax (4 classes)</text></svg></div>`
+    }),
+
+    col2: section({ tipKey:"components", title:"System Components & Dashboards",
+      html:`<p>Trained model deployed as a FastAPI backend serving a lightweight React frontend. Linguists and companies paste paragraphs to get regional targeting.</p>
+      <div class="visual"><svg viewBox="0 0 200 100"><rect x="10" y="10" width="180" height="80" fill="#faf8f3" stroke="#d6d3ce" rx="4"/><rect x="10" y="10" width="180" height="14" fill="#4338ca" rx="2"/><text x="20" y="20" fill="white" font-size="8">Dialect Analyzer Web Portal</text>
+      <rect x="20" y="32" width="100" height="20" fill="#e7e5e0" rx="3"/><text x="30" y="46" fill="#78716c" font-size="9">Input text here…</text>
+      <rect x="20" y="62" width="55" height="14" fill="#4338ca" rx="3"/><text x="48" y="73" fill="white" font-size="9" text-anchor="middle">Analyze</text>
+      <rect x="130" y="32" width="50" height="44" fill="#e0e7ff" rx="6"/><text x="155" y="48" fill="#4338ca" font-size="9" text-anchor="middle">Result:</text><text x="155" y="64" fill="#312e81" font-size="12" text-anchor="middle" font-weight="bold">Najdi</text><text x="155" y="74" fill="#10b981" font-size="8" text-anchor="middle">91% conf</text></svg></div>`
+    }) +
+    section({ tipKey:"results", title:"Results",
+      html:`<p>Achieved <strong>88.4% global accuracy</strong>. Najdi/Eastern showed 12% confusion due to tribal linguistic crossover and shared idioms.</p>
+      <div class="visual"><svg viewBox="0 0 200 90">
+      <rect x="60" y="10" width="20" height="20" fill="#312e81"/><rect x="85" y="10" width="20" height="20" fill="#c7d2fe"/><rect x="110" y="10" width="20" height="20" fill="#a5b4fc"/>
+      <rect x="60" y="35" width="20" height="20" fill="#e0e7ff"/><rect x="85" y="35" width="20" height="20" fill="#3730a3"/><rect x="110" y="35" width="20" height="20" fill="#c7d2fe"/>
+      <rect x="60" y="60" width="20" height="20" fill="#a5b4fc"/><rect x="85" y="60" width="20" height="20" fill="#e0e7ff"/><rect x="110" y="60" width="20" height="20" fill="#4338ca"/>
+      <text x="50" y="22" font-size="8" text-anchor="end" fill="#44403c">Naj</text>
+      <text x="50" y="47" font-size="8" text-anchor="end" fill="#44403c">Hej</text>
+      <text x="50" y="72" font-size="8" text-anchor="end" fill="#44403c">Eas</text>
+      <text x="155" y="50" font-size="13" fill="#312e81" font-weight="bold">88.4%</text></svg>
+      <div class="visual-cap">Confusion Matrix (darker = higher accuracy)</div></div>`
+    }) +
+    section({ tipKey:"conclusion", title:"Conclusion & Future Work",
+      html:`<p>MARBERT identified regional variations at high fidelity. <strong>Limitation:</strong> Arabizi (Latin-script Arabic) is currently misclassified.</p>
+      <ul><li>Add Arabizi normalization layer.</li><li>Integrate Whisper for live audio routing.</li></ul>`
+    }),
+
+    col3: section({ tipKey:"impact", title:"Impact", kind:"impact",
+      html:`<p>Saudi Arabia has one of the world's highest social-media usage rates per capita. Dialect-aware AI lets local apps speak <em>to</em> users, not <em>at</em> them.</p>
+      ${impactStats([{num:"30M+",label:"Saudi speakers covered"},{num:"4×",label:"Chatbot satisfaction"},{num:"+38%",label:"Survey response rates"},{num:"open",label:"Dataset released"}])}
+      <div class="impact-sdg"><span class="sdg-chip">Vision 2030</span><span>Cultural Identity · National Character pillar</span></div>`
+    }) +
+    section({ tipKey:"tools", title:"Tools & QR",
+      html:`${tools(['hf','pytorch','react','fastapi'],['HuggingFace','PyTorch','React','FastAPI'])}<div style="text-align:center;"><div class="qr-box">${QR}</div></div>`
+    })
+  },
+
+  /* ============ 4. SECURENET — Cybersecurity ============ */
+  {
+    emoji: "🛡️",
+    name: "SecureNet",
+    badge: "Cybersecurity",
+    introTitle: "Lightweight BERT for Real-Time Phishing Detection",
+    introDesc: "Distilled BERT runs entirely inside a browser extension, classifying URLs in 23ms — fast enough to block phishing pages before they ever load.",
+    introTags: ["Cybersecurity", "BERT", "Browser Extension", "Real-time"],
+    title: "SecureNet: Lightweight BERT for Real-Time Phishing URL Detection",
+    authors: "L. Alharthi, F. Alotaibi · Supervised by Dr. N. Alotaibi",
+    themePrimary: "#7c2d12",
+    projectLogo: `<svg viewBox="0 0 100 100" class="project-logo"><circle cx="50" cy="50" r="45" fill="#fef2f2" stroke="#7c2d12" stroke-width="4"/><path d="M 50 25 L 70 35 L 70 55 Q 70 70 50 78 Q 30 70 30 55 L 30 35 Z" fill="#7c2d12" stroke="#dc2626" stroke-width="2"/><path d="M 42 50 L 48 56 L 60 44" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
+    col1: section({ tipKey:"abstract", title:"Abstract",
+      html:`<p>Phishing causes $4.9B in annual global losses. Existing detectors rely on blacklists that miss zero-day URLs. SecureNet fine-tunes a distilled BERT model on URL token sequences, achieving <strong>97.1% F1</strong> with <strong>23ms inference</strong> per URL — fast enough for browser extensions.</p>`
+    }) +
+    section({ tipKey:"overview", title:"Methodology — System Overview",
+      html:`<p>Browser extension intercepts the URL before navigation → tokenizes → DistilBERT inference → block/allow decision returned to user before the page can render.</p>
+      <div class="visual"><svg viewBox="0 0 200 80"><rect x="5" y="25" width="40" height="30" fill="#fef2f2" stroke="#7c2d12" rx="6"/><text x="25" y="44" font-size="9" text-anchor="middle" fill="#7c2d12">Browser</text>
+      <path d="M 45 40 L 75 40" stroke="#7c2d12" stroke-width="2"/>
+      <rect x="80" y="20" width="50" height="40" fill="#7c2d12" rx="6"/><text x="105" y="44" fill="white" font-size="11" text-anchor="middle" font-weight="bold">DistilBERT</text>
+      <path d="M 130 40 L 160 40" stroke="#7c2d12" stroke-width="2"/>
+      <rect x="160" y="25" width="35" height="30" fill="#10b981" rx="6"/><text x="178" y="44" fill="white" font-size="9" text-anchor="middle">Allow</text></svg></div>`
+    }) +
+    section({ tipKey:"dataset", title:"Methodology — Dataset",
+      html:`<p>PhishTank + OpenPhish + UCI ISCX-URL2016 = 1.2M labeled URLs (50% phishing, 50% benign). Augmented with character-level perturbations to defend against homoglyph attacks (e.g., paypa<em>I</em>.com).</p>`
+    }) +
+    section({ tipKey:"model", title:"AI Model Pipeline",
+      html:`<p>URL → custom char-level tokenizer (preserves "/", "?", "=") → DistilBERT (66M params, 6 layers) → binary classification head. Knowledge distillation from BERT-base teacher. LR=5e-5, 3 epochs.</p>
+      <div class="visual"><svg viewBox="0 0 200 110"><rect x="20" y="8" width="160" height="22" fill="#fef2f2" stroke="#7c2d12" rx="4"/><text x="100" y="22" font-size="10" text-anchor="middle" font-family="monospace" fill="#7c2d12">https://paypaI.com/login</text>
+      <rect x="60" y="40" width="80" height="18" fill="#e7e5e0" rx="3"/><text x="100" y="52" font-size="9" text-anchor="middle" fill="#44403c">Char Tokenizer</text>
+      <rect x="40" y="68" width="120" height="36" fill="#7c2d12" rx="6"/><text x="100" y="86" fill="white" font-size="12" text-anchor="middle" font-weight="bold">DistilBERT</text><text x="100" y="100" fill="#fecaca" font-size="9" text-anchor="middle">Distilled · 66M params</text></svg></div>`
+    }),
+
+    col2: section({ tipKey:"components", title:"System Components",
+      html:`<p>Chrome/Firefox extension shows colored badge (green/yellow/red). Admin dashboard tracks org-wide phishing attempts in real time for SOC teams.</p>
+      <div class="visual"><svg viewBox="0 0 220 100"><rect x="10" y="10" width="80" height="80" fill="#faf8f3" stroke="#a8a29e" rx="6"/><rect x="10" y="10" width="80" height="14" fill="#7c2d12" rx="3"/><text x="50" y="20" fill="white" font-size="8" text-anchor="middle">Extension</text>
+      <circle cx="50" cy="50" r="14" fill="#dc2626"/><text x="50" y="56" fill="white" font-size="16" text-anchor="middle">⚠</text><text x="50" y="80" font-size="8" text-anchor="middle" fill="#7c2d12" font-weight="bold">PHISHING</text>
+      <rect x="100" y="10" width="110" height="80" fill="#faf8f3" stroke="#a8a29e" rx="6"/><rect x="100" y="10" width="110" height="14" fill="#7c2d12" rx="3"/>
+      <rect x="110" y="32" width="40" height="20" fill="#dc2626"/><text x="130" y="45" fill="white" font-size="9" text-anchor="middle">Threats: 47</text>
+      <path d="M 110 75 L 140 65 L 170 70 L 200 55" fill="none" stroke="#dc2626" stroke-width="2"/></svg>
+      <div class="visual-cap">Browser badge + SOC dashboard</div></div>`
+    }) +
+    section({ tipKey:"results", title:"Results",
+      html:`<p>SecureNet achieves <strong>F1 = 0.971</strong> vs 0.83 for blacklist-only and 0.92 for traditional Random Forest features.</p>
+      <div class="visual"><svg viewBox="0 0 200 100"><line x1="20" y1="10" x2="20" y2="80" stroke="#44403c"/><line x1="20" y1="80" x2="180" y2="80" stroke="#44403c"/>
+      <text x="10" y="45" font-size="8" transform="rotate(-90 10,45)" text-anchor="middle" fill="#44403c">F1 score</text>
+      <rect x="35" y="35" width="25" height="45" fill="#a8a29e"/><text x="47" y="30" font-size="10" text-anchor="middle" fill="#44403c">.83</text><text x="47" y="95" font-size="7" text-anchor="middle" fill="#78716c">Blacklist</text>
+      <rect x="80" y="20" width="25" height="60" fill="#a8a29e"/><text x="92" y="15" font-size="10" text-anchor="middle" fill="#44403c">.92</text><text x="92" y="95" font-size="7" text-anchor="middle" fill="#78716c">Random F.</text>
+      <rect x="125" y="10" width="25" height="70" fill="#7c2d12"/><text x="137" y="8" font-size="11" text-anchor="middle" font-weight="bold" fill="#7c2d12">.971</text><text x="137" y="95" font-size="7" text-anchor="middle" font-weight="bold" fill="#7c2d12">SecureNet</text></svg></div>`
+    }) +
+    section({ tipKey:"conclusion", title:"Conclusion & Future Work",
+      html:`<p>Distillation made BERT viable in-browser without server round-trips. <strong>Limitation:</strong> URL-only — does not analyze page content, missing some social-engineering attacks.</p>
+      <ul><li>Add multimodal page-screenshot analysis.</li><li>Federated learning across enterprise endpoints.</li></ul>`
+    }),
+
+    col3: section({ tipKey:"impact", title:"Impact", kind:"impact",
+      html:`<p>Saudi Arabia ranked #1 globally for phishing-attack volume in 2024 (per Kaspersky). Real-time blocking at the user's browser closes a critical gap left by email filters.</p>
+      ${impactStats([{num:"23ms",label:"Per-URL latency"},{num:"−94%",label:"User exposure"},{num:"$1.2M",label:"Saved per 10K users"},{num:"0",label:"Cloud calls needed"}])}
+      <div class="impact-sdg"><span class="sdg-chip">SDG 16</span><span>Strong Institutions · National Cybersecurity Strategy</span></div>`
+    }) +
+    section({ tipKey:"tools", title:"Tools & QR",
+      html:`${tools(['python','pytorch','hf','docker'],['Python','PyTorch','HuggingFace','Docker'])}<div style="text-align:center;"><div class="qr-box">${QR}</div></div>`
+    })
+  },
+
+  /* ============ 5. ACCESSUI — HCI ============ */
+  {
+    emoji: "👁️",
+    name: "AccessUI",
+    badge: "HCI / a11y",
+    introTitle: "Adaptive Web Interfaces for Visually Impaired Users",
+    introDesc: "An on-device ML browser extension that learns each user's vision profile from their interactions and auto-adapts contrast, font size, and voice navigation in real time.",
+    introTags: ["HCI", "Accessibility", "On-device ML", "Inclusive Design"],
+    title: "AccessUI: Adaptive Web Interfaces for Visually Impaired Users",
+    authors: "R. Alqahtani, H. Alharbi · Supervised by Dr. S. Bukhari",
+    themePrimary: "#0e7490",
+    projectLogo: `<svg viewBox="0 0 100 100" class="project-logo"><circle cx="50" cy="50" r="45" fill="#cffafe" stroke="#0e7490" stroke-width="4"/><ellipse cx="50" cy="50" rx="28" ry="14" fill="none" stroke="#0e7490" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="#0e7490"/><circle cx="52" cy="48" r="2" fill="white"/></svg>`,
+    col1: section({ tipKey:"abstract", title:"Abstract",
+      html:`<p>2.2B people globally have vision impairment, yet 96% of websites fail WCAG accessibility standards. AccessUI uses on-device ML to auto-adapt any webpage in real time — adjusting contrast, font size, and adding voice navigation. User study (n=42) showed <strong>3.1× faster task completion</strong>.</p>`
+    }) +
+    section({ tipKey:"overview", title:"Methodology — System Overview",
+      html:`<p>Browser extension scans DOM → TensorFlow.js model classifies user vision profile from interaction patterns → applies adaptive CSS injections + voice layer.</p>
+      <div class="visual"><svg viewBox="0 0 200 80"><rect x="5" y="25" width="35" height="30" fill="#cffafe" stroke="#0e7490" rx="6"/><text x="22" y="44" font-size="8" text-anchor="middle" fill="#0e7490">Webpage</text>
+      <rect x="55" y="20" width="40" height="40" fill="#0e7490" rx="6"/><text x="75" y="38" fill="white" font-size="10" text-anchor="middle">TF.js</text><text x="75" y="50" fill="white" font-size="8" text-anchor="middle">Model</text>
+      <rect x="110" y="25" width="40" height="30" fill="#06b6d4" rx="6"/><text x="130" y="44" fill="white" font-size="9" text-anchor="middle">Adapt</text>
+      <rect x="165" y="25" width="30" height="30" fill="#10b981" rx="6"/><text x="180" y="44" fill="white" font-size="8" text-anchor="middle">User</text></svg></div>`
+    }) +
+    section({ tipKey:"dataset", title:"Methodology — Dataset",
+      html:`<p>15,000 anonymized interaction sessions from WebAIM survey + custom field study with King Saud University accessibility center. Labeled into 5 vision profiles (low-vision, color-blind variants, blind+screen-reader).</p>`
+    }) +
+    section({ tipKey:"model", title:"AI Model Pipeline",
+      html:`<p>Lightweight 3-layer MLP runs entirely client-side via TensorFlow.js (no PII leaves device). Inputs: zoom level, scroll velocity, hover duration, font preference. Output: 5-class profile + confidence.</p>
+      <div class="visual"><svg viewBox="0 0 200 110"><rect x="20" y="10" width="160" height="22" fill="#e7e5e0" rx="6"/><text x="100" y="25" font-size="10" text-anchor="middle" fill="#44403c">Interaction Features</text>
+      <rect x="40" y="42" width="120" height="40" fill="#0e7490" rx="8"/><text x="100" y="60" fill="white" font-size="12" text-anchor="middle" font-weight="bold">MLP Classifier</text><text x="100" y="74" fill="#cffafe" font-size="9" text-anchor="middle">3 hidden layers · ReLU</text>
+      <rect x="60" y="92" width="80" height="14" fill="#06b6d4" rx="3"/><text x="100" y="103" fill="white" font-size="9" text-anchor="middle">Vision Profile</text></svg></div>`
+    }),
+
+    col2: section({ tipKey:"components", title:"System Components",
+      html:`<p>Floating accessibility toolbar with one-click profile switching, voice command activation ("read this section"), and high-contrast palette swap with smooth animation.</p>
+      <div class="visual"><svg viewBox="0 0 200 100"><rect x="10" y="10" width="180" height="80" fill="#1c1917" rx="6"/>
+      <rect x="20" y="20" width="160" height="10" fill="#06b6d4"/>
+      <rect x="20" y="35" width="120" height="6" fill="#cffafe"/>
+      <rect x="20" y="45" width="140" height="6" fill="#cffafe"/>
+      <rect x="20" y="55" width="100" height="6" fill="#cffafe"/>
+      <circle cx="170" cy="75" r="11" fill="#0e7490"/><text x="170" y="80" fill="white" font-size="12" text-anchor="middle">🔊</text></svg>
+      <div class="visual-cap">High-contrast theme + voice button</div></div>`
+    }) +
+    section({ tipKey:"results", title:"Results",
+      html:`<p>User study (n=42 visually impaired participants): <strong>3.1× faster</strong> task completion vs unmodified pages. SUS usability score: <strong>87/100</strong>. Profile classifier accuracy: 91.3%.</p>
+      <div class="visual"><svg viewBox="0 0 200 90"><line x1="20" y1="10" x2="20" y2="70" stroke="#44403c"/><line x1="20" y1="70" x2="180" y2="70" stroke="#44403c"/>
+      <text x="10" y="40" font-size="7" transform="rotate(-90 10,40)" text-anchor="middle" fill="#44403c">Time (s)</text>
+      <rect x="40" y="10" width="40" height="60" fill="#a8a29e"/><text x="60" y="8" font-size="11" text-anchor="middle" fill="#44403c">94s</text><text x="60" y="85" font-size="8" text-anchor="middle" fill="#78716c">Original</text>
+      <rect x="120" y="50" width="40" height="20" fill="#0e7490"/><text x="140" y="45" font-size="11" text-anchor="middle" font-weight="bold" fill="#0e7490">30s</text><text x="140" y="85" font-size="8" text-anchor="middle" font-weight="bold" fill="#0e7490">AccessUI</text></svg></div>`
+    }) +
+    section({ tipKey:"conclusion", title:"Conclusion & Future Work",
+      html:`<p>On-device ML enabled adaptation without privacy cost. <strong>Limitation:</strong> tested on Arabic + English only; complex SPAs need DOM mutation observers.</p>
+      <ul><li>Extend to motor impairment (gesture adaptation).</li><li>Browser-vendor partnership for native integration.</li></ul>`
+    }),
+
+    col3: section({ tipKey:"impact", title:"Impact", kind:"impact",
+      html:`<p>The Mowaamah-certified workplace movement in Saudi Arabia depends on accessible digital tools. AccessUI transparently retrofits any government or commercial web service.</p>
+      ${impactStats([{num:"3.1×",label:"Faster task completion"},{num:"87/100",label:"SUS usability score"},{num:"100%",label:"On-device, no PII"},{num:"42",label:"Users in field study"}])}
+      <div class="impact-sdg"><span class="sdg-chip">SDG 10</span><span>Reduced Inequalities · Mowaamah · Vision 2030 Quality of Life</span></div>`
+    }) +
+    section({ tipKey:"tools", title:"Tools & QR",
+      html:`${tools(['react','tf','voice','figma'],['React','TensorFlow.js','Web Speech','Figma'])}<div style="text-align:center;"><div class="qr-box">${QR}</div></div>`
+    })
+  }
+];
+
+/* ====================================================================
+   GUIDED TOUR — for the step-by-step poster
+   ==================================================================== */
+const TOUR = [
+  { idx: 0, title: "Step 1 — Write the Abstract",
+    body: "Start here. In 3-4 sentences: state the problem, name your method, give one number. Reviewers spend 30 seconds on this — make it count.",
+    tip: "💡 Template: 'X causes Y problem. We propose Z. Result: N% improvement over baseline.'" },
+  { idx: 1, title: "Step 2 — Sketch the System",
+    body: "Build the high-level diagram BEFORE writing details. If you can't draw your system in 5 boxes, you don't understand it yet.",
+    tip: "💡 Use boxes for components, arrows for data flow. Color-code by responsibility." },
+  { idx: 2, title: "Step 3 — Document the Data",
+    body: "Always answer: where, how many, how split, what augmentations. This is what reviewers check first when results look suspicious.",
+    tip: "💡 If your dataset is < 1000 samples, justify it explicitly." },
+  { idx: 3, title: "Step 4 — The Model Pipeline",
+    body: "Name the architecture (don't say 'a neural network'). Show 2-3 hyperparameters. Justify any modification you made.",
+    tip: "💡 Pre-trained models are credibility, not weakness. Always cite the original paper." },
+  { idx: 4, title: "Step 5 — Show the User Side",
+    body: "Real screenshots beat mockups. Mockups beat 'web app' text. Show how the AI output becomes ACTIONABLE.",
+    tip: "💡 Crop screenshots to ONE feature, not the full UI at once." },
+  { idx: 5, title: "Step 6 — Quantitative Results",
+    body: "Numbers. Charts. Baseline. No exceptions. 'Performed well' is a red flag for examiners.",
+    tip: "💡 Always report the metric NAME (mAP@50, F1-macro). 'Accuracy' alone isn't enough on imbalanced data." },
+  { idx: 6, title: "Step 7 — Show the Impact",
+    body: "This section often decides the grade. Translate numbers into people, money, time, or environmental gains. Tie to Vision 2030 or SDGs.",
+    tip: "💡 4 stat tiles work better than a paragraph. Make the 'so what' visible at a glance." },
+  { idx: 7, title: "Step 8 — Honest Conclusion",
+    body: "State limits explicitly. Examiners trust honest students more than students who claim perfection. Two concrete future-work bullets.",
+    tip: "💡 Future work should solve the limitations you just listed — not random new ideas." }
+];
+
+/* ====================================================================
+   STATE
+   ==================================================================== */
+const STORAGE_KEY = 'cs-poster-toolkit-v2';
+const state = {
+  theme: 'light',
+  posterIdx: 0,
+  showBad: false,
+  rubricChecked: {},
+  tourActive: false,
+  tourStep: 0
+};
+
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    if (saved.theme) state.theme = saved.theme;
+    if (saved.rubricChecked) state.rubricChecked = saved.rubricChecked;
+  } catch(e) {}
+}
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      theme: state.theme,
+      rubricChecked: state.rubricChecked
+    }));
+  } catch(e) {}
+}
+
+/* ====================================================================
+   THEME
+   ==================================================================== */
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', state.theme);
+  document.getElementById('theme-icon').textContent = state.theme === 'dark' ? '☀️' : '🌙';
+}
+
+/* ====================================================================
+   NAV PILLS
+   ==================================================================== */
+function renderNav() {
+  const nav = document.getElementById('poster-nav');
+  nav.innerHTML = POSTERS.map((p, i) => `
+    <button class="nav-pill ${i === state.posterIdx ? 'active' : ''}" data-idx="${i}">
+      <span class="nav-emoji">${p.emoji}</span>
+      <span>${p.name}</span>
+      <span class="nav-tag">${p.badge}</span>
+    </button>
+  `).join('');
+  nav.querySelectorAll('.nav-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.posterIdx = parseInt(btn.dataset.idx);
+      if (state.tourActive) exitTour();
+      loadPoster();
+      renderNav();
+      window.scrollTo({ top: document.querySelector('.stage').offsetTop - 70, behavior: 'smooth' });
+    });
+  });
+}
+
+/* ====================================================================
+   POSTER RENDER
+   ==================================================================== */
+function loadPoster() {
+  const data = POSTERS[state.posterIdx];
+  const intro = document.getElementById('poster-intro-host');
+  const board = document.getElementById('poster-board');
+
+  intro.innerHTML = `
+    <div class="poster-intro">
+      <div class="intro-number">${state.posterIdx + 1}</div>
+      <div class="intro-text">
+        <h2 class="intro-title">${data.introTitle}</h2>
+        <p class="intro-desc">${data.introDesc}</p>
+        <div class="intro-tags">
+          ${data.introTags.map((tag, i) => `<span class="intro-tag${i === 0 ? ' gold' : ''}">${tag}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  board.style.opacity = 0;
+  setTimeout(() => {
+    board.innerHTML = `
+      <div class="p-header" style="border-bottom-color:${data.themePrimary}">
+        <div class="header-layout">
+          <div>${TU_LOGO}</div>
+          <div class="header-text">
+            <h2 style="color:${data.themePrimary}">${data.title}</h2>
+            <div class="authors">${data.authors}</div>
+          </div>
+          <div>${data.projectLogo}</div>
+        </div>
+      </div>
+      <div class="p-col1">${data.col1}</div>
+      <div class="p-col2">${data.col2}</div>
+      <div class="p-col3">${data.col3}</div>
+      <div class="p-footer">Academic Poster Layout · Hover the gold ⓘ icons for grading rubrics</div>
+    `;
+    board.style.opacity = 1;
+    attachTooltips();
+    if (state.showBad) applyBadMode();
+    document.getElementById('start-tour-btn').classList.toggle('hidden', !data.isGuide);
+  }, 120);
+}
+
+function attachTooltips() {
+  document.querySelectorAll('.info-icon').forEach(icon => {
+    const key = icon.dataset.tipkey;
+    if (!key || !TIPS[key] || icon.querySelector('.tooltip')) return;
+    const t = TIPS[key];
+    icon.insertAdjacentHTML('beforeend', `
+      <span class="tooltip">
+        <span class="tooltip-eyebrow">${t.title}</span>
+        <div class="tooltip-body">${t.body}</div>
+        <div class="tooltip-rubric"><span class="pts">${t.points} pts</span><span>${t.rubric}</span></div>
+      </span>
+    `);
+  });
+}
+
+/* ====================================================================
+   GOOD vs BAD MODE
+   ==================================================================== */
+function applyBadMode() {
+  document.querySelectorAll('.section').forEach(sec => {
+    const bad = sec.dataset.badHtml;
+    const content = sec.querySelector('.section-content');
+    if (!content) return;
+    if (state.showBad && bad && bad.trim()) {
+      if (!sec.dataset.originalHtml) sec.dataset.originalHtml = content.innerHTML;
+      content.innerHTML = bad.replace(/&quot;/g, '"');
+      sec.classList.add('bad-mode');
+    } else if (sec.dataset.originalHtml) {
+      content.innerHTML = sec.dataset.originalHtml;
+      sec.classList.remove('bad-mode');
+      delete sec.dataset.originalHtml;
+    }
+  });
+  document.getElementById('pill-bad').classList.toggle('on', state.showBad);
+  document.getElementById('goodbad-btn').classList.toggle('active', state.showBad);
+}
+
+/* ====================================================================
+   RUBRIC
+   ==================================================================== */
+function renderRubric() {
+  const list = document.getElementById('rubric-list');
+  list.innerHTML = RUBRIC.map(cat => `
+    <div class="rubric-cat">
+      <h4>${cat.cat}</h4>
+      ${cat.items.map(item => `
+        <label class="rubric-item ${state.rubricChecked[item.id] ? 'checked' : ''}" data-id="${item.id}">
+          <input type="checkbox" data-id="${item.id}" ${state.rubricChecked[item.id] ? 'checked' : ''}>
+          <span class="rubric-item-text"><span class="rubric-pts">+${item.pts}</span>${item.text}</span>
+        </label>
+      `).join('')}
+    </div>
+  `).join('');
+  list.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', e => {
+      const id = e.target.dataset.id;
+      if (e.target.checked) state.rubricChecked[id] = true;
+      else delete state.rubricChecked[id];
+      e.target.closest('.rubric-item').classList.toggle('checked', e.target.checked);
+      updateScore();
+      saveState();
+    });
+  });
+  updateScore();
+}
+function updateScore() {
+  let total = 0;
+  RUBRIC.forEach(cat => cat.items.forEach(item => {
+    if (state.rubricChecked[item.id]) total += item.pts;
+  }));
+  document.getElementById('score-num').textContent = total;
+  document.getElementById('score-fill').style.width = total + '%';
+}
+
+/* ====================================================================
+   GUIDED TOUR
+   ==================================================================== */
+function startTour() {
+  if (!POSTERS[state.posterIdx].isGuide) {
+    state.posterIdx = 0;
+    loadPoster();
+    renderNav();
+    setTimeout(startTour, 200);
+    return;
+  }
+  state.tourActive = true;
+  state.tourStep = 0;
+  document.getElementById('tour-overlay').classList.add('active');
+  document.getElementById('tour-card').classList.add('active');
+  document.getElementById('pill-tour').classList.add('on');
+  showTourStep();
+}
+function showTourStep() {
+  const step = TOUR[state.tourStep];
+  document.querySelectorAll('.section.tour-active').forEach(s => s.classList.remove('tour-active'));
+  const sections = document.querySelectorAll('#poster-board .section');
+  const target = sections[step.idx];
+  if (target) {
+    target.classList.add('tour-active');
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  document.getElementById('tour-label').textContent = `Step ${state.tourStep + 1} of ${TOUR.length}`;
+  document.getElementById('tour-title').textContent = step.title;
+  document.getElementById('tour-body').textContent = step.body;
+  document.getElementById('tour-tip').textContent = step.tip;
+  document.getElementById('tour-progress').textContent = `${state.tourStep + 1} / ${TOUR.length}`;
+  document.getElementById('tour-prev').disabled = state.tourStep === 0;
+  document.getElementById('tour-next').textContent = state.tourStep === TOUR.length - 1 ? 'Finish ✓' : 'Next →';
+}
+function exitTour() {
+  state.tourActive = false;
+  document.getElementById('tour-overlay').classList.remove('active');
+  document.getElementById('tour-card').classList.remove('active');
+  document.getElementById('pill-tour').classList.remove('on');
+  document.querySelectorAll('.section.tour-active').forEach(s => s.classList.remove('tour-active'));
+}
+
+/* ====================================================================
+   EVENTS & INIT
+   ==================================================================== */
+document.getElementById('theme-btn').addEventListener('click', () => {
+  state.theme = state.theme === 'light' ? 'dark' : 'light';
+  applyTheme();
+  saveState();
+});
+
+document.getElementById('goodbad-btn').addEventListener('click', () => {
+  state.showBad = !state.showBad;
+  applyBadMode();
+});
+
+document.getElementById('rubric-btn').addEventListener('click', () => {
+  document.getElementById('rubric-panel').classList.toggle('open');
+});
+document.getElementById('rubric-close').addEventListener('click', () => {
+  document.getElementById('rubric-panel').classList.remove('open');
+});
+document.getElementById('rubric-reset').addEventListener('click', () => {
+  if (confirm('Reset all rubric checkboxes?')) {
+    state.rubricChecked = {};
+    renderRubric();
+    saveState();
+  }
+});
+
+document.getElementById('print-btn').addEventListener('click', () => {
+  document.getElementById('rubric-panel').classList.remove('open');
+  setTimeout(() => window.print(), 200);
+});
+
+document.getElementById('start-tour-btn').addEventListener('click', startTour);
+document.getElementById('tour-next').addEventListener('click', () => {
+  if (state.tourStep === TOUR.length - 1) exitTour();
+  else { state.tourStep++; showTourStep(); }
+});
+document.getElementById('tour-prev').addEventListener('click', () => {
+  if (state.tourStep > 0) { state.tourStep--; showTourStep(); }
+});
+document.getElementById('tour-exit').addEventListener('click', exitTour);
+
+document.addEventListener('keydown', (e) => {
+  if (state.tourActive) {
+    if (e.key === 'Escape') exitTour();
+    if (e.key === 'ArrowRight') document.getElementById('tour-next').click();
+    if (e.key === 'ArrowLeft') document.getElementById('tour-prev').click();
+  }
+});
+
+// INIT
+loadState();
+applyTheme();
+renderNav();
+loadPoster();
+renderRubric();
+</script>
+</body>
+</html>
